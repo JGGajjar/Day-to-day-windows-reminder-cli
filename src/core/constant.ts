@@ -46,7 +46,7 @@ programConfig.set("fileName", "notification.json");
 programConfig.set("ConfigFileName", "config.json");
 programConfig.set("notificationIconPath", path.join(__dirname, "wns.png"));
 programConfig.set("imageExtension", [".jpg", ".jpeg", ".png"]);
-programConfig.set("welcomeHeadline", "Welcome to D2D Windows Notifier CLI!");
+programConfig.set("welcomeHeadline", "Welcome to D2D Reminder CLI!");
 programConfig.set("processid", process.pid);
 
 export const bannerText = () => programConfig.get("bannertext");
