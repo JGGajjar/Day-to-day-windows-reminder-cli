@@ -80,8 +80,8 @@ export const initScheduleJob = async ({ msg }: any) => {
   try {
     if (msg?.length > 0 && msg[0]?.notifiertoggle === "e") {
       const tasksToSchedule = createTasksToSchedule({ msg });
+      await stopSchedule();
       if (tasksToSchedule.length === 0) {
-        await stopSchedule();
         return;
       }
       tasksToSchedule.forEach(

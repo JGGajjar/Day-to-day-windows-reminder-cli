@@ -5,13 +5,13 @@ import * as BL from "./logic";
 const notificationOptions = (oName: string, oMsg: string, oImg: string) => {
   return {
     name: oName,
-    title: `${oName.toLowerCase() === `welcomejob` ? `Welcome` : `D2D`}`,
+    title: `${oName.toLowerCase() === `welcomejob` ? `Welcome` : `Reminder`}`,
     message: `${oMsg}`,
     icon: oImg,
     sound: true,
     wait: true,
     withFallback: true,
-    appName: `Reminder CLI`,
+    appName: `Notification`,
   };
 };
 

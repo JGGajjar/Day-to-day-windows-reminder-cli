@@ -410,10 +410,9 @@ export const rawFilesPipe = () => {
         date: FP.getfulldate(),
       });
 
-      FP.pipe(
-        FS.readFile,
-        SC.initScheduleJob,
-      )({ filePath: CONVAR.getFilepath(), date: FP.getfulldate() });
+      SC.initScheduleJob(
+        FS.readFile({ filePath: CONVAR.getFilepath(), date: FP.getfulldate() }),
+      );
     });
 };
 
