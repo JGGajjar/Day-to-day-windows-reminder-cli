@@ -1,0 +1,53 @@
+{
+  "name": "d2dwin-reminder-cli",
+  "version": "1.0.0",
+  "description": "Manage day to day reminder(text/task) by CLI.",
+  "main": "./bin/index.js",
+  "bin": {
+    "dn": "./bin/index.js"
+  },
+  "scripts": {
+    "start": "node ./bin/index.js",
+    "build": "tsc && copyfiles -u 1 \"src/**/*.png\" dist",
+    "format": "prettier --write \"src/**/*.{js,ts,json}\"",
+    "format:check": "prettier --check \"src/**/*.{js,ts,json}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Reminder CLI",
+    "Notifier CLI",
+    "Daily Reminder",
+    "Reminder notification"
+  ],
+  "author": "Jay Gajjar <jaygajjar29@gmail.com>",
+  "license": "MIT",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JGGajjar/d2d-win-reminder-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JGGajjar/d2d-win-reminder-cli/issues"
+  },
+  "homepage": "https://github.com/JGGajjar/d2d-win-reminder-cli.git#readme",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "chokidar": "^5.0.0",
+    "commander": "^15.0.0",
+    "console-table-printer": "^2.16.1",
+    "cron-validator": "^1.4.0",
+    "figlet": "^1.11.2",
+    "find-process": "^2.1.1",
+    "node": "^26.5.0",
+    "node-notifier": "^10.0.1",
+    "node-schedule": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@types/node-notifier": "^8.0.5",
+    "@types/node-schedule": "^2.1.8",
+    "copyfiles": "^2.4.1",
+    "prettier": "^3.9.5",
+    "typescript": "^7.0.2"
+  }
+}
