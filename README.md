@@ -44,8 +44,8 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
 
 - `dn --nad "Text1{02:00|Text2{03:00"` : For add new reminder item(s).
 
-- `dn --nus "1{Done|3{Done"` : For update reminder item(s) status ['Active','Done'] (Recommend : first disable reminder then update status and enable the reminder).
+- `dn --nus "1{Done|3{Done"` : For update reminder item(s) status ['Active','Done'] (Recommend steps : first disable reminder, update status then enable reminder).
 
-- `dn --nud "1{00:01|3{00:10"` : For update reminder item(s) duration (Recommend : first disable reminder then update duration and enable the reminder).
+- `dn --nud "1{00:01|3{00:10"` : For update reminder item(s) duration (Recommend steps : first disable reminder, update duration then enable reminder).
 
-- `dn --nui [LOCAL SYSTEM IMAGE PATH]` : For update reminder icon image (Recommend : first disable reminder then update icon image and enable the reminder).
+- `dn --nui [LOCAL SYSTEM IMAGE PATH]` : For update reminder icon image (Recommend steps : first disable reminder, update icon image then enable reminder).
