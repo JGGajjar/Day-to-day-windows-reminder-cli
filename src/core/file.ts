@@ -9,6 +9,11 @@ export const writeFile = (wObj: {
   dataObj: INTERFACE.NOTIFICATION | INTERFACE.NOTIFICATIONCONFIG;
 }) => {
   try {
+    if ("notifierlist" in wObj.dataObj[0]) {
+      wObj.dataObj[0]?.notifierlist.sort(
+        (a, b) => (b.status === "Done" ? 1 : 0) - (a.status === "Done" ? 1 : 0),
+      );
+    }
     const stringData = JSON.stringify(wObj.dataObj, null, 2);
     FS.writeFileSync(wObj.filePath, stringData, {
       encoding: "utf8",

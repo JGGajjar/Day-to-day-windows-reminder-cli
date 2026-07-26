@@ -34,7 +34,7 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
 
 - `dn --help` : For all available options.
 
-<img width="1107" height="610" alt="help" src="https://github.com/user-attachments/assets/1e88e657-a57e-4508-8de6-9843329377c8" />
+<img width="1680" height="938" alt="help" src="https://github.com/user-attachments/assets/c4598286-220a-488b-81d0-9e8480d097ee" />
 
 - `dn --nls` : For view your reminder item list.
 
@@ -42,10 +42,73 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
 
 - `dn --nd` : For disable all reminder.
 
-- `dn --nad "Text1{02:00|Text2{03:00"` : For add new reminder item(s).
+- `dn --nad` : For add new reminder item(s). (each item separate by '|||').
 
-- `dn --nus "1{Done|3{Done"` : For update reminder item(s) status ['Active','Done'] (Recommend steps : first disable reminder, update status then enable reminder).
+  > *NOTE :
+  > To prevent internal double quotes from breaking a string, you must wrap the text inside single quotes (' ').
 
-- `dn --nud "1{00:01|3{00:10"` : For update reminder item(s) duration (Recommend steps : first disable reminder, update duration then enable reminder).
+  > [ Text{HH:MM{'A' | 'T' ]
+  >
+  > 'A' | 'a' : To launch and run an executable command(s) using the Windows Command Prompt
+  >
+  > 'T' | 't' : Notification reminder
 
-- `dn --nui [LOCAL SYSTEM IMAGE PATH]` : For update reminder icon image (Recommend steps : first disable reminder, update icon image then enable reminder).
+  > Example:
+
+  > Notification reminder :
+  >
+  > ```bash
+  > dn --nad "Todo1{01:00{t|||Todo2{02:00"
+  > ```
+
+  > Windows Command Prompt : Launch and run an executable command(s)
+  >
+  > ```bash
+  > dn --nad "ipconfig /all & ping google.com & netstat -an{00:30{a|||(ipconfig && ping google.com) || echo 'Network setup failed'{02:00{a"
+  > ```
+
+- `dn --nus` : For Update reminder item(s) status(Active | Done). (each item separate by '|||')
+
+  > *Recommend steps : first disable reminder, update status then enable reminder.
+
+  > [ Item Index{Updated Status ] : For Item index check `dn --nls` option.
+
+  > Example:
+  >
+  > ```bash
+  > dn --nus "1{Done|||2{Done|||3{Active"
+  > ```
+
+- `dn --nud` : For Update reminder item(s) duration(HH:MM). (each item separate by '|||')
+
+  > *Recommend steps : first disable reminder, update duration then enable reminder.
+
+  > [ Item Index{HH:MM ] : For Item index check `dn --nls` option.
+
+  > Example:
+  >
+  > ```bash
+  > dn --nud "1{00:30|||2{02:40|||3{04:09"
+  > ```
+
+- `dn --nut` : For Update reminder item(s) type( 'A' | 'T' ). (each item separate by '|||')
+
+  > *Recommend steps : first disable reminder, update type then enable reminder.
+
+  > [ Item index{type( 'A' | 'T' ) ] : For Item index check `dn --nls` option.
+  >
+  > 'A' | 'a' : To launch and run an executable command(s) using the Windows Command Prompt
+  >
+  > 'T' | 't' : Notification reminder
+
+  > Example:
+  >
+  > ```bsh
+  > dn --nut "1{A|||2{T|||3{T"
+  > ```
+
+- `dn --nui [LOCAL SYSTEM IMAGE PATH]` : For update notification icon image.
+
+  > *Recommend steps : first disable reminder, update icon image then enable reminder.
+
+  > Allowed Extensions: '.jpg', '.jpeg', '.png'

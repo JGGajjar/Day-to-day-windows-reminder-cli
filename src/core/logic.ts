@@ -12,9 +12,8 @@ import * as SC from "./scheduleJob";
 export const addNotificationData = (value: any, dummyPrevious: any) => {
   try {
     if (value?.trim().length === 0) throw error;
-
     const notificationInputTodoList = value
-      .split("|")
+      .split("|||")
       .map((datainpunt: string) => {
         return CONVAR.TODOITEM(
           datainpunt.split("{")[0],
@@ -22,10 +21,14 @@ export const addNotificationData = (value: any, dummyPrevious: any) => {
           FP.isValidTime(datainpunt.split("{")[1])
             ? datainpunt.split("{")[1]
             : "02:00",
+          datainpunt.split("{")[2]?.length === 1
+            ? datainpunt.split("{")[2].toLowerCase() === "a"
+              ? "a"
+              : "t"
+            : "t",
         );
       })
       .filter(Boolean);
-
     const notificationInputdata: INTERFACE.NOTIFICATION = [
       CONVAR.NOTIFICATIONDATA(
         FP.getfulldate(),
@@ -35,12 +38,11 @@ export const addNotificationData = (value: any, dummyPrevious: any) => {
         notificationInputTodoList.length,
       ),
     ];
-
     return { error: false, msg: notificationInputdata };
   } catch (error) {
     return {
       error: true,
-      msg: 'Invalid Data. Add new notifier items(separate todo by "|") [Todo Item{HH:MM] ex. Todo1{01:00|Todo2{04:00|Todo3{02:00 ...',
+      msg: 'Invalid Data. Add new notifier items(separate todo by "|||") [Todo Item{HH:MM] ex. Todo1{01:00|Todo2{04:00|Todo3{02:00 ...',
     };
   }
 };
@@ -49,12 +51,16 @@ export const updateNotificationstatus = (value: any, dummyPrevious: any) => {
   try {
     if (value?.trim().length === 0) throw error;
 
-    const getarginput = value.split("|");
+    const getarginput = value.split("|||");
     const genratedatafrominput = getarginput
       .map((datainpunt: string) => {
         if (datainpunt?.trim().length > 0) {
           let getspliteddata = datainpunt.split("{");
-          if (["Active", "Done"].includes(getspliteddata[1])) {
+          if (
+            ["Active", "Done"].some(
+              (item) => item.toLowerCase() === getspliteddata[1].toLowerCase(),
+            )
+          ) {
             return {
               index: Number(getspliteddata[0]),
               status: getspliteddata[1],
@@ -99,7 +105,7 @@ export const updateNotificationstatus = (value: any, dummyPrevious: any) => {
 export const updateNotificationduration = (value: any, dummyPrevious: any) => {
   try {
     if (value?.trim().length === 0) throw error;
-    const getarginput = value.split("|");
+    const getarginput = value.split("|||");
     const genratedatafrominput = getarginput
       .map((datainpunt: string) => {
         if (datainpunt?.trim().length > 0) {
@@ -164,6 +170,58 @@ export const updateNotificationIconimage = (value: any, dummyPrevious: any) => {
     return {
       error: true,
       msg: `Please check path / file extension ['.jpg', '.jpeg', '.png'] and re-enter.`,
+    };
+  }
+};
+
+export const updateNotificationtype = (value: any, dummyPrevious: any) => {
+  try {
+    if (value?.trim().length === 0) throw error;
+    const getarginput = value.split("|||");
+    const genratedatafrominput = getarginput
+      .map((datainpunt: string) => {
+        if (datainpunt?.trim().length > 0) {
+          let getspliteddata = datainpunt.split("{");
+          if (
+            ["A", "T"].some(
+              (item) => item.toLowerCase() === getspliteddata[1].toLowerCase(),
+            )
+          ) {
+            return {
+              index: Number(getspliteddata[0]),
+              type: getspliteddata[1],
+            };
+          } else {
+            throw Error;
+          }
+        }
+      })
+      .filter(Boolean);
+    const rfs = FS.readFile({
+      filePath: CONVAR.getFilepath(),
+      date: FP.getfulldate(),
+    });
+    if (!rfs.error && rfs.msg.length > 0) {
+      genratedatafrominput.forEach((item: { index: number; type: string }) => {
+        rfs.msg[0]?.notifierlist.forEach(
+          (d: { todo: string; status: string }, index: number) => {
+            if (item.index <= rfs.msg[0]?.notifierlist.length) {
+              let tempItem = item.index - 1;
+              if (index === tempItem) {
+                rfs.msg[0].notifierlist[index].type = item.type;
+              }
+            } else {
+              throw Error;
+            }
+          },
+        );
+      });
+    }
+    return { error: false, msg: rfs.msg };
+  } catch (err) {
+    return {
+      error: true,
+      msg: "No Data found / Invalid data enter. Please check and re-enter type( A | T ) [Item Index{Updated Type] ex. 1{A|2{T|3{T",
     };
   }
 };
@@ -262,6 +320,24 @@ const commanderAction = (programObj: any) => {
         updateFilePipe({
           type: "u",
           uData: options?.updateduration?.msg,
+        });
+        consoleDataList("n");
+        if (getPidStatus) {
+          SC.initScheduleJob(
+            FS.readFile({
+              filePath: CONVAR.getFilepath(),
+              date: FP.getfulldate(),
+            }),
+          );
+        } else {
+          process.exit(0);
+        }
+        break;
+      case typeof options?.updatetype?.error === "boolean" &&
+        !options?.updatetype?.error:
+        updateFilePipe({
+          type: "u",
+          uData: options?.updatetype?.msg,
         });
         consoleDataList("n");
         if (getPidStatus) {

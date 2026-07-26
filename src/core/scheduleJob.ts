@@ -4,6 +4,8 @@ import * as CONVAR from "./constant";
 import * as FS from "./file";
 import * as FP from "./fp";
 import * as NMSG from "./notifierorg";
+import * as INTERFACE from "./interface";
+import * as CP from "./childprocess";
 
 let activeJobs = new Map();
 
@@ -39,31 +41,27 @@ export const createTasksToSchedule = ({ msg }: any) => {
   )[0].notificationicon;
   const SCrule = { ...getDateRule(), icon: getActiveIcon };
   const tasksToSchedule = msg[0].notifierlist
-    .map(
-      (
-        element: { todo: string; status: string; hour: string },
-        index: number,
-      ) => {
-        if (
-          element.status.toLowerCase() === "active" ||
-          element.status.toLowerCase() === "welcome"
-        ) {
-          return {
-            ...SCrule,
-            id: `rm_${index}`,
-            name: `${element.status.toLowerCase() === `welcome` ? `welcomejob` : `job${++index}`}`,
-            cron: isValidCron(
-              `0 ${Number(element.hour.split(":")[1]) === 0 ? `0` : `*/${Number(element.hour.split(":")[1])}`} ${Number(element.hour.split(":")[0]) === 0 ? `*` : `*/${Number(element.hour.split(":")[0])}`} * * *`,
-              { seconds: true },
-            )
-              ? `0 ${Number(element.hour.split(":")[1]) === 0 ? `0` : `*/${Number(element.hour.split(":")[1])}`} ${Number(element.hour.split(":")[0]) === 0 ? `*` : `*/${Number(element.hour.split(":")[0])}`} * * *`
-              : "0 0 */2 * * *",
-            status: element.status,
-            todo: element.todo,
-          };
-        }
-      },
-    )
+    .map((element: INTERFACE.todoItem, index: number) => {
+      if (
+        element.status.toLowerCase() === "active" ||
+        element.status.toLowerCase() === "welcome"
+      ) {
+        return {
+          ...SCrule,
+          id: `rm_${index}`,
+          name: `${element.status.toLowerCase() === `welcome` ? `welcomejob` : `job${++index}`}`,
+          cron: isValidCron(
+            `0 ${Number(element.hour.split(":")[1]) === 0 ? `0` : `*/${Number(element.hour.split(":")[1])}`} ${Number(element.hour.split(":")[0]) === 0 ? `*` : `*/${Number(element.hour.split(":")[0])}`} * * *`,
+            { seconds: true },
+          )
+            ? `0 ${Number(element.hour.split(":")[1]) === 0 ? `0` : `*/${Number(element.hour.split(":")[1])}`} ${Number(element.hour.split(":")[0]) === 0 ? `*` : `*/${Number(element.hour.split(":")[0])}`} * * *`
+            : "0 0 */2 * * *",
+          status: element.status,
+          todo: element.todo,
+          type: element.type,
+        };
+      }
+    })
     .filter(Boolean);
   return tasksToSchedule;
 };
@@ -92,6 +90,7 @@ export const initScheduleJob = async ({ msg }: any) => {
           cron: SC.Spec;
           todo: string;
           icon: string;
+          type: string;
         }) => {
           if (activeJobs.has(task.id)) {
             activeJobs.get(task.id).cancel();
@@ -107,12 +106,20 @@ export const initScheduleJob = async ({ msg }: any) => {
             if (cpuPercentage > 10) {
               stopSpecificJob(task.id, task.cron);
             }
-            try {
-              await new Promise((resolve) =>
-                NMSG.sendNotification(task.name, task.todo, task.icon),
-              );
-            } catch (error) {
-              throw error;
+            if (task.type.toLowerCase() === "t") {
+              try {
+                await new Promise((resolve) =>
+                  NMSG.sendNotification(task.name, task.todo, task.icon),
+                );
+              } catch (error) {
+                throw error;
+              }
+            } else {
+              try {
+                CP.cmdAction(`${task.todo}`);
+              } catch (error) {
+                throw error;
+              }
             }
 
             start = end;

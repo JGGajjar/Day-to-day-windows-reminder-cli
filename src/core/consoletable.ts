@@ -17,23 +17,39 @@ const createNotificationRowObj = (tObj: {
   d: INTERFACE.NOTIFICATION;
 }) => {
   if (tObj.d.length > 0) {
-    tObj.t.table.title = `Reminder List [ Notification status : ${tObj.d[0].notifiertoggle === "e" ? chalk.green(`Enable`) : chalk.red(`Disable`)} ]`;
-    tObj.d[0].notifierlist.forEach(
-      (d: { todo: string; status: string; hour: string }, index: number) => {
-        tObj.t.addRow(
-          CONVAR.PRINTNOTIFICATIONTABLE(
-            ++index,
-            d.todo,
-            d.status,
-            tObj.d[0].notifierdate,
-            `Every ${d.hour} ${d.hour.includes(":") ? (Number(d.hour.split(":")[0]) === 0 ? "min" : "hour") : "."}.`,
-          ),
-          d.status.toLowerCase() === "active"
-            ? { color: "red" }
-            : { color: "green" },
-        );
-      },
+    tObj.t.table.title = `Date : ${chalk.hex("#ff8800").bold.inverse(" " + tObj.d[0].notifierdate + " ")}                                              Reminder List                                                   Status : ${tObj.d[0].notifiertoggle === "e" ? chalk.hex("#34C119").inverse(` Enable `) : chalk.hex("#D12F27").inverse(` Disable `)}`;
+    tObj.d[0].notifierlist.sort(
+      (a, b) => (b.status === "Done" ? 1 : 0) - (a.status === "Done" ? 1 : 0),
     );
+    tObj.d[0].notifierlist.forEach((d: INTERFACE.todoItem, index: number) => {
+      tObj.t.addRow(
+        CONVAR.PRINTNOTIFICATIONTABLE(
+          ++index,
+          d.todo,
+          chalk.inverse(
+            d.status.toLowerCase() === "active" ||
+              d.status.toLowerCase() === "welcome"
+              ? chalk.hex("#D12F27")("  Active  ")
+              : chalk.hex("#34C119")("   Done   "),
+          ),
+          d.type.toLowerCase() === "a"
+            ? chalk.hex("#277CFB").inverse("   CMD    ")
+            : chalk.hex("#FBA527").inverse("   NTFY   "),
+          d.status.toLowerCase() === "done"
+            ? chalk
+                .hex("#34C119")
+                .inverse.strikethrough(
+                  `  Every ${d.hour} ${d.hour.includes(":") ? (Number(d.hour.split(":")[0]) === 0 ? "min" : "hrs") : "."}  `,
+                )
+            : `  Every ${d.hour} ${d.hour.includes(":") ? (Number(d.hour.split(":")[0]) === 0 ? "min" : "hrs") : "."}  `,
+        ),
+        d.status.toLowerCase() === "active" ||
+          d.status.toLowerCase() === "welcome"
+          ? { color: "red", separator: true }
+          : { color: "green", separator: true },
+      );
+    });
+    console.log("\n");
     tObj.t.printTable();
   }
 };
@@ -51,12 +67,19 @@ const createNotificationConfigRowObj = (tObj: {
         CONVAR.PRINTNOTIFICATIONCONFIGTABLE(
           ++index,
           d.notificationicon,
-          d.notifierstatus ? "Active" : "Inactive",
+          chalk.inverse(
+            d.notifierstatus
+              ? chalk.hex("#34C119")("  Active  ")
+              : chalk.hex("#D12F27")(" Inactive "),
+          ),
           d.notifierdate,
         ),
-        d.notifierstatus ? { color: "green" } : { color: "red" },
+        d.notifierstatus
+          ? { color: "green", separator: true }
+          : { color: "red", separator: true },
       );
     });
+    console.log("\n");
     tObj.t.printTable();
   }
 };
@@ -68,6 +91,7 @@ export const notificationList = (printTableObj: INTERFACE.NOTIFICATION) => {
       createNotificationRowObj,
     )({
       c: {
+        style: "fatBorder",
         columns: CONVAR.printNotificationTableColumns(),
       },
       d: printTableObj,
@@ -88,6 +112,7 @@ export const notificationConfigList = (
       createNotificationConfigRowObj,
     )({
       c: {
+        style: "fatBorder",
         title: "Notification Configuration",
         columns: CONVAR.printConfigTableColumns(),
       },

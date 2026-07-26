@@ -2,6 +2,7 @@ export interface todoItem {
   todo: string;
   status: string;
   hour: string;
+  type: string;
 }
 
 export interface notifierData {
@@ -22,7 +23,7 @@ export interface printNotificationTableRow {
   index: number;
   notification: string;
   status: string;
-  date: string;
+  type: string;
   duration: string;
 }
 
