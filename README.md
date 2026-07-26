@@ -34,7 +34,7 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
 
 - `dn --help` : For all available options.
 
-<img width="1680" height="938" alt="help" src="https://github.com/user-attachments/assets/c4598286-220a-488b-81d0-9e8480d097ee" />
+<img width="1690" height="934" alt="help" src="https://github.com/user-attachments/assets/5bac93e0-c66a-4de6-ae4e-c1bb9fee7b16" />
 
 - `dn --nls` : For view your reminder item list.
 
