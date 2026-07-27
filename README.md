@@ -85,8 +85,7 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
   > dn --nus "1{Done|||2{Done|||3{Active"
   > ```
 
-<img width="1346" height="461" alt="nus" src="https://github.com/user-attachments/assets/21a1dcfd-fc68-4e29-99d9-324b59f295f1" />
-
+<img width="1346" height="461" alt="nus" src="https://github.com/user-attachments/assets/ab536400-887d-44f6-91ab-3eda1ce94777" />
 
 - `dn --nud` : For Update reminder item(s) duration(HH:MM). (each item separate by '|||')
 
@@ -100,8 +99,7 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
   > dn --nud "1{00:30|||2{02:40|||3{04:09"
   > ```
 
-<img width="1344" height="462" alt="nud" src="https://github.com/user-attachments/assets/2aae4bbf-8007-4153-87db-5d800c739c32" />
-
+<img width="1344" height="462" alt="nud" src="https://github.com/user-attachments/assets/0dab5f03-d2cf-4f43-a9ec-d837559036e3" />
 
 - `dn --nut` : For Update reminder item(s) type( 'A' | 'T' ). (each item separate by '|||')
 
@@ -119,8 +117,7 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
   > dn --nut "1{A|||2{T|||3{T"
   > ```
 
-<img width="1341" height="460" alt="nut" src="https://github.com/user-attachments/assets/61506092-406c-4574-849b-c710e2077176" />
-
+<img width="1341" height="460" alt="nut" src="https://github.com/user-attachments/assets/051395f9-aeea-40e8-a9ca-4125260349d3" />
 
 - `dn --nui [LOCAL SYSTEM IMAGE PATH]` : For update notification icon image.
 
@@ -128,4 +125,4 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
 
   > Allowed Extensions: '.jpg', '.jpeg', '.png'
 
-<img width="1119" height="330" alt="nui" src="https://github.com/user-attachments/assets/ef2f7c6e-4523-48c3-ba37-aefe49c62a42" />
+<img width="1119" height="330" alt="nui" src="https://github.com/user-attachments/assets/bfd0d406-a877-4412-b957-a0de02a8a17e" />
