@@ -1,6 +1,6 @@
 {
   "name": "d2dwin-reminder-cli",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Manage day to day reminder(text/task) by CLI.",
   "main": "./bin/index.js",
   "bin": {
@@ -14,6 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
+    "Windows reminder CLI",
     "Reminder CLI",
     "Notifier CLI",
     "Daily Reminder",
@@ -24,12 +25,12 @@
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JGGajjar/d2dwin-reminder-cli.git"
+    "url": "https://github.com/JGGajjar/Day-to-day-windows-reminder-cli.git"
   },
   "bugs": {
-    "url": "https://github.com/JGGajjar/d2dwin-reminder-cli/issues"
+    "url": "https://github.com/JGGajjar/Day-to-day-windows-reminder-cli/issues"
   },
-  "homepage": "https://github.com/JGGajjar/d2dwin-reminder-cli.git#readme",
+  "homepage": "https://github.com/JGGajjar/Day-to-day-windows-reminder-cli.git#readme",
   "dependencies": {
     "chalk": "^5.6.2",
     "chokidar": "^5.0.0",
