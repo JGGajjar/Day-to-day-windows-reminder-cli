@@ -42,6 +42,9 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
 
 - `dn --nd` : For disable all reminder.
 
+<img width="1348" height="273" alt="nudi" src="https://github.com/user-attachments/assets/b960c67f-54ea-4461-8a6b-b26288d48a77" />
+
+
 - `dn --nad` : For add new reminder item(s). (each item separate by '|||').
 
   > *NOTE :
@@ -67,6 +70,9 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
   > dn --nad "ipconfig /all & ping google.com & netstat -an{00:30{a|||(ipconfig && ping google.com) || echo 'Network setup failed'{02:00{a"
   > ```
 
+<img width="1350" height="619" alt="add" src="https://github.com/user-attachments/assets/d7e97838-1a54-4d59-ae35-3dc9e55b11dc" />
+
+
 - `dn --nus` : For Update reminder item(s) status(Active | Done). (each item separate by '|||')
 
   > *Recommend steps : first disable reminder, update status then enable reminder.
@@ -79,6 +85,9 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
   > dn --nus "1{Done|||2{Done|||3{Active"
   > ```
 
+<img width="1346" height="461" alt="nus" src="https://github.com/user-attachments/assets/21a1dcfd-fc68-4e29-99d9-324b59f295f1" />
+
+
 - `dn --nud` : For Update reminder item(s) duration(HH:MM). (each item separate by '|||')
 
   > *Recommend steps : first disable reminder, update duration then enable reminder.
@@ -90,6 +99,9 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
   > ```bash
   > dn --nud "1{00:30|||2{02:40|||3{04:09"
   > ```
+
+<img width="1344" height="462" alt="nud" src="https://github.com/user-attachments/assets/2aae4bbf-8007-4153-87db-5d800c739c32" />
+
 
 - `dn --nut` : For Update reminder item(s) type( 'A' | 'T' ). (each item separate by '|||')
 
@@ -107,8 +119,13 @@ VERIFY package : Use `npm list --global --depth=0` command to lists all installe
   > dn --nut "1{A|||2{T|||3{T"
   > ```
 
+<img width="1341" height="460" alt="nut" src="https://github.com/user-attachments/assets/61506092-406c-4574-849b-c710e2077176" />
+
+
 - `dn --nui [LOCAL SYSTEM IMAGE PATH]` : For update notification icon image.
 
   > *Recommend steps : first disable reminder, update icon image then enable reminder.
 
   > Allowed Extensions: '.jpg', '.jpeg', '.png'
+
+<img width="1119" height="330" alt="nui" src="https://github.com/user-attachments/assets/ef2f7c6e-4523-48c3-ba37-aefe49c62a42" />
