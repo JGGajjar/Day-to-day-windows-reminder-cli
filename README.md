@@ -1,11 +1,12 @@
 # Day to day windows reminder cli
 
 CLI for handling custom day to day reminder task/text by native notifications using Node.js. Toasters for Windows 8/10, or taskbar balloons for earlier Windows versions.
-
-<img width="403" height="150" alt="n" src="https://github.com/user-attachments/assets/0b4e0d64-af99-4b8c-a9b4-d4b81a7ee40b" />
-
-<img width="400" height="162" alt="cmd" src="https://github.com/user-attachments/assets/7d35c5c4-2e10-4888-ae51-a133621fd711" />
-
+<p align="center">
+  <img width="730" height="271" alt="n" src="https://github.com/user-attachments/assets/e3cb0d0c-69cc-48f8-8e80-e995e9f029ec" />
+</p>
+<p align="center">
+  <img width="730" height="274" alt="cmd" src="https://github.com/user-attachments/assets/5a439406-91cc-4844-8355-9c5a5db863f2" />
+</p>
 ## Installation
 
 ```bash
