@@ -5,7 +5,7 @@ CLI for handling custom day to day reminder task/text by native notifications us
   <img width="730" height="271" alt="n" src="https://github.com/user-attachments/assets/e3cb0d0c-69cc-48f8-8e80-e995e9f029ec" />
 </p>
 <p align="center">
-  <img width="730" height="274" alt="cmd" src="https://github.com/user-attachments/assets/5a439406-91cc-4844-8355-9c5a5db863f2" />
+  <img width="730" height="410" alt="cmd" src="https://github.com/user-attachments/assets/ed7c8992-8072-48fe-9c5c-874fe7e13f2c" />
 </p>
 
 ## Installation
